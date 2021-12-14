@@ -54,14 +54,14 @@ class MyCityViewController: UIViewController {
         self.mapView.clear()
         var markerList = [GMSMarker]()
         for city in self.viewModel.cities {
-            guard let latitude = city.latitude, let longitude = city.longitude else {
-                return}
-            let marker = GMSMarker()
-            marker.map = self.mapView
-            marker.iconView = UIImageView(image: R.image.marker())
-            let location = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude))
-            marker.position =  location
-            markerList.append(marker)
+            if let latitude = city.latitude, let longitude = city.longitude  {
+                let marker = GMSMarker()
+                marker.map = self.mapView
+                marker.iconView = UIImageView(image: R.image.marker())
+                let location = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude))
+                marker.position =  location
+                markerList.append(marker)
+            }
         }
         MapViewUtils().delay(seconds: 2) { () -> () in
             //fit map to markers
@@ -72,8 +72,6 @@ class MyCityViewController: UIViewController {
             let update = GMSCameraUpdate.fit(bounds, withPadding: 30)
             self.mapView.animate(with: update)
         }
-        
-        print("count \(viewModel.cities.count)")
     }
     
     func setupSegmentedView(){
@@ -83,8 +81,6 @@ class MyCityViewController: UIViewController {
     func showMapView(){
         mapView.isHidden = false
         listView.isHidden = true
-        self.createCityMarkers()
-
     }
     
     func showListView(){
@@ -156,6 +152,7 @@ extension MyCityViewController: UITableViewDataSource, UITableViewDelegate {
 extension MyCityViewController:ViewModelToViewDelegate{
     func dataReceived() {
         DispatchQueue.main.async {
+            self.createCityMarkers()
             self.tableView.reloadData()
         }
     }
