@@ -97,9 +97,3 @@ struct Pagination:Codable {
     }
     
 }
-
-
-enum TableSection: Int {
-    case userList
-    case loader
-}

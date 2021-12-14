@@ -26,7 +26,7 @@ class MyCityViewController: UIViewController {
     }
     
     private func setupView() {
-        title = "Cities of the word"
+        title = R.string.localizable.navigationTitle()
         tableView.rowHeight = 64
         tableView.dataSource = self
         tableView.delegate = self
@@ -34,15 +34,12 @@ class MyCityViewController: UIViewController {
     }
     
     func fetchCities(){
-        viewModel.fetchData{ [weak self] success in
-            if !success {
-                //                self?.hideBottomLoader()
-            }
-        }
+        viewModel.fetchData(completed: nil)
     }
     
     func setupSearchBar(){
         searchBar.delegate = self
+        searchBar.searchTextField.addKeyboardDoneButton()
     }
 }
 
@@ -67,12 +64,14 @@ extension MyCityViewController: UITableViewDataSource, UITableViewDelegate {
         cell.selectionStyle = .none
         switch section {
         case .userList:
-            let repo = viewModel.cities[indexPath.row]
-            cell.textLabel?.text = repo.name
+            let city = viewModel.cities[indexPath.row]
+            cell.textLabel?.text = city.name
             cell.textLabel?.textColor = .label
-            cell.detailTextLabel?.text = "\(repo.id)"
+            if let cityId = city.id{
+                cell.detailTextLabel?.text = String(cityId)
+            }
         case .loader:
-            cell.textLabel?.text = "Loading.."
+            cell.textLabel?.text = R.string.localizable.loadingText()
             cell.textLabel?.textColor = .systemBlue
         }
         return cell
@@ -83,7 +82,6 @@ extension MyCityViewController: UITableViewDataSource, UITableViewDelegate {
         guard !viewModel.cities.isEmpty else { return }
         
         if section == .loader {
-            print("load new data..")
             self.viewModel.fetchData { [weak self] success in
                 if !success {
                     self?.hideBottomLoader()
@@ -113,11 +111,9 @@ extension MyCityViewController: UISearchBarDelegate {
         self.viewModel.fitlerData(word: searchText){ _ in
             
         }
-        print("test here \(searchText)")
-        
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        
+        searchBar.resignFirstResponder()
     }
 }
