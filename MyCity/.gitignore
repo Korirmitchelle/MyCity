@@ -1,0 +1,21 @@
+*.ipa
+
+## Desktop Services Store
+.DS_Store
+
+
+## User settings
+xcuserdata/
+
+UserInterfaceState\.xcuserstate
+
+Pods/
+fastlane/test_output/report.junit
+
+fastlane/test_output/report.html
+
+R.generated.swift
+vendor/bundle/
+
+.bundle/
+
