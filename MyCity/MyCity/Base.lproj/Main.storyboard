@@ -44,6 +44,7 @@
                             </view>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="n5t-2i-SAd">
                                 <rect key="frame" x="0.0" y="88" width="414" height="32"/>
+                                <color key="backgroundColor" red="0.2627450980392157" green="0.10980392156862745" blue="0.32549019607843138" alpha="0.16872057377897345" colorSpace="custom" customColorSpace="sRGB"/>
                                 <segments>
                                     <segment title="List"/>
                                     <segment title="Map"/>
