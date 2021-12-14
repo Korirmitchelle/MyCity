@@ -20,11 +20,14 @@ enum APIError: Error {
 struct APIManager {
     static let shared = APIManager()
 
-    func getUsers(perPage: Int = 30, sinceId: Int, completion: @escaping (Result<CityModel, APIError>) -> Void) {
+    func getCities(filter: String, page: Int, completion: @escaping (Result<CityModel, APIError>) -> Void) {
         var components = URLComponents(string: "http://connect-demo.mobile1.io/square1/connect/v1/city")!
+        
         components.queryItems = [
-            URLQueryItem(name: "page", value: "\(sinceId)"),
+            URLQueryItem(name: "page", value: "\(page)"),
+            URLQueryItem(name: "filter[0][name][contains]", value: "\(filter)")
         ]
+        
         guard let url = components.url else {
             completion(.failure(.invalidUrl))
             return

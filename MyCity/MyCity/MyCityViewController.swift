@@ -16,16 +16,13 @@ class MyCityViewController: UIViewController {
     }
     
     @IBOutlet weak var tableView: UITableView!
-    
+    @IBOutlet weak var searchBar: UISearchBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        viewModel.fetchData{ [weak self] success in
-            if !success {
-//                self?.hideBottomLoader()
-            }
-        }
+        fetchCities()
+        setupSearchBar()
     }
     
     private func setupView() {
@@ -34,6 +31,18 @@ class MyCityViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         viewModel.delegate = self
+    }
+    
+    func fetchCities(){
+        viewModel.fetchData{ [weak self] success in
+            if !success {
+                //                self?.hideBottomLoader()
+            }
+        }
+    }
+    
+    func setupSearchBar(){
+        searchBar.delegate = self
     }
 }
 
@@ -55,6 +64,7 @@ extension MyCityViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let section = TableSection(rawValue: indexPath.section) else { return UITableViewCell() }
         let cell = UITableViewCell(style: .value1, reuseIdentifier: "Cell")
+        cell.selectionStyle = .none
         switch section {
         case .userList:
             let repo = viewModel.cities[indexPath.row]
@@ -95,5 +105,19 @@ extension MyCityViewController:ViewModelToViewDelegate{
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
+    }
+}
+
+extension MyCityViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.viewModel.fitlerData(word: searchText){ _ in
+            
+        }
+        print("test here \(searchText)")
+        
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        
     }
 }

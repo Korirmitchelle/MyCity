@@ -16,27 +16,50 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" id="zAf-ZT-99D">
-                                <rect key="frame" x="0.0" y="60" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="che-s5-c81">
-                                <rect key="frame" x="0.0" y="104" width="414" height="758"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i1v-bP-6hZ">
+                                <rect key="frame" x="0.0" y="119" width="414" height="777"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="che-s5-c81">
+                                        <rect key="frame" x="0.0" y="52" width="414" height="725"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </tableView>
+                                    <searchBar contentMode="redraw" id="zAf-ZT-99D">
+                                        <rect key="frame" x="0.0" y="8" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </searchBar>
+                                </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </tableView>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="che-s5-c81" secondAttribute="trailing" id="O03-i6-fPo"/>
+                                    <constraint firstAttribute="bottom" secondItem="che-s5-c81" secondAttribute="bottom" id="TYn-CE-d0m"/>
+                                    <constraint firstItem="che-s5-c81" firstAttribute="top" secondItem="zAf-ZT-99D" secondAttribute="bottom" id="ZgF-ey-r5v"/>
+                                    <constraint firstItem="che-s5-c81" firstAttribute="leading" secondItem="i1v-bP-6hZ" secondAttribute="leading" id="bSv-rL-wbc"/>
+                                </constraints>
+                            </view>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="n5t-2i-SAd">
+                                <rect key="frame" x="0.0" y="88" width="414" height="32"/>
+                                <segments>
+                                    <segment title="First"/>
+                                    <segment title="Second"/>
+                                </segments>
+                            </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="che-s5-c81" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="9c1-Ro-lH2"/>
-                            <constraint firstItem="che-s5-c81" firstAttribute="top" secondItem="zAf-ZT-99D" secondAttribute="bottom" id="UC1-Q8-xrO"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="che-s5-c81" secondAttribute="bottom" id="fL6-SV-lZk"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="che-s5-c81" secondAttribute="trailing" id="oXw-dp-JM9"/>
+                            <constraint firstItem="i1v-bP-6hZ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="RAw-4y-CWN"/>
+                            <constraint firstItem="n5t-2i-SAd" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Tv3-6m-NCf"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="n5t-2i-SAd" secondAttribute="trailing" id="VZU-Q0-2Zs"/>
+                            <constraint firstItem="i1v-bP-6hZ" firstAttribute="top" secondItem="n5t-2i-SAd" secondAttribute="bottom" id="az5-0w-0xd"/>
+                            <constraint firstAttribute="bottom" secondItem="i1v-bP-6hZ" secondAttribute="bottom" id="gzX-qI-es9"/>
+                            <constraint firstItem="n5t-2i-SAd" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="thq-8g-tnX"/>
+                            <constraint firstAttribute="trailing" secondItem="i1v-bP-6hZ" secondAttribute="trailing" id="ug6-rk-LN5"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="P1b-GQ-6co"/>
                     <connections>
+                        <outlet property="searchBar" destination="zAf-ZT-99D" id="Mcq-e2-y4q"/>
                         <outlet property="tableView" destination="che-s5-c81" id="8hN-VR-ZNb"/>
                     </connections>
                 </viewController>
