@@ -54,14 +54,13 @@ class MyCityViewController: UIViewController {
         self.mapView.clear()
         var markerList = [GMSMarker]()
         for city in self.viewModel.cities {
-            if let latitude = city.latitude, let longitude = city.longitude  {
-                let marker = GMSMarker()
-                marker.map = self.mapView
-                marker.iconView = UIImageView(image: R.image.marker())
-                let location = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude))
-                marker.position =  location
-                markerList.append(marker)
-            }
+            let marker = GMSMarker()
+            marker.map = self.mapView
+            marker.iconView = UIImageView(image: R.image.marker())
+            let location = CLLocationCoordinate2D(latitude: CLLocationDegrees(city.latitude?.zeroOrValue ?? 0 ), longitude: CLLocationDegrees(city.longitude?.zeroOrValue ?? 0))
+            marker.position =  location
+            markerList.append(marker)
+            
         }
         MapViewUtils().delay(seconds: 2) { () -> () in
             //fit map to markers
@@ -118,9 +117,7 @@ extension MyCityViewController: UITableViewDataSource, UITableViewDelegate {
             let city = viewModel.cities[indexPath.row]
             cell.textLabel?.text = city.name
             cell.textLabel?.textColor = .label
-            if let cityId = city.id{
-                cell.detailTextLabel?.text = String(cityId)
-            }
+            cell.detailTextLabel?.text = String(city.id)
         case .loader:
             cell.textLabel?.text = R.string.localizable.loadingText()
             cell.textLabel?.textColor = .systemBlue
