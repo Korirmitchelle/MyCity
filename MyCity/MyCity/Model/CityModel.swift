@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 struct CityModel:Codable{
     let time: Int
     let data: Data
@@ -25,7 +26,7 @@ struct CityModel:Codable{
 }
 
 struct Data:Codable {
-    let items: [Items]
+    let items: [City]
     let pagination : Pagination
     
     enum CodingKeys:String, CodingKey {
@@ -35,12 +36,12 @@ struct Data:Codable {
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        items = try container.decode([Items].self, forKey: .items)
+        items = try container.decode([City].self, forKey: .items)
         pagination = try container.decode(Pagination.self, forKey: .pagination)
     }
 }
 
-struct Items:Codable {
+struct City:Codable {
     let id:Int?
     let name:String?
     let localName:String?

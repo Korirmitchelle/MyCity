@@ -18,7 +18,7 @@ class CityViewModel  {
     private var currentPage: Int = 1
     var delegate: ViewModelToViewDelegate?
     
-    var cities = [Items]() {
+    var cities = [City]() {
         didSet {
             self.delegate?.dataReceived()
         }

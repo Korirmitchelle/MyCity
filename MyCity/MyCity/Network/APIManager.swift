@@ -7,7 +7,7 @@
 
 import Foundation
 import RxSwift
-import RxCocoa
+import RealmSwift
 
 enum APIError: Error {
     case invalidUrl
