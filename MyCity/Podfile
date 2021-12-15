@@ -11,6 +11,8 @@ target 'MyCity' do
   pod 'RxCocoa', '6.2.0'
   pod 'GoogleMaps'
   pod 'GooglePlaces'
+  pod 'RealmSwift'
+  pod 'RxRealm'
 
   target 'MyCityTests' do
     inherit! :search_paths

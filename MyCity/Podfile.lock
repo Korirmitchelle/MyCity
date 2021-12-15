@@ -8,9 +8,19 @@ PODS:
   - R.swift (5.4.0):
     - R.swift.Library (~> 5.3.0)
   - R.swift.Library (5.3.0)
+  - Realm (10.20.1):
+    - Realm/Headers (= 10.20.1)
+  - Realm/Headers (10.20.1)
+  - RealmSwift (10.20.1):
+    - Realm (= 10.20.1)
   - RxCocoa (6.2.0):
     - RxRelay (= 6.2.0)
     - RxSwift (= 6.2.0)
+  - RxRealm (5.0.3):
+    - Realm (~> 10.7)
+    - RealmSwift (~> 10.7)
+    - RxCocoa (~> 6.0)
+    - RxSwift (~> 6.0)
   - RxRelay (6.2.0):
     - RxSwift (= 6.2.0)
   - RxSwift (6.2.0)
@@ -19,7 +29,9 @@ DEPENDENCIES:
   - GoogleMaps
   - GooglePlaces
   - R.swift
+  - RealmSwift
   - RxCocoa (= 6.2.0)
+  - RxRealm
   - RxSwift (= 6.2.0)
 
 SPEC REPOS:
@@ -28,7 +40,10 @@ SPEC REPOS:
     - GooglePlaces
     - R.swift
     - R.swift.Library
+    - Realm
+    - RealmSwift
     - RxCocoa
+    - RxRealm
     - RxRelay
     - RxSwift
 
@@ -37,10 +52,13 @@ SPEC CHECKSUMS:
   GooglePlaces: 5d87ca13ed98b7a937e0d8bc7026f718c7263271
   R.swift: c533450b0f7dc494e0993f5f1a1db925d84c3006
   R.swift.Library: 0fc583cb55a99e28901299cc451614cad1161962
+  Realm: fac5ecd031fcb81171627b74944c885662d4b266
+  RealmSwift: 9b02d25acb46a14756bde9893abb99e2e3675923
   RxCocoa: 4baf94bb35f2c0ab31bc0cb9f1900155f646ba42
+  RxRealm: d9fedf16e3ead54b0be2077d2ff4a1b2dc27be39
   RxRelay: e72dbfd157807478401ef1982e1c61c945c94b2f
   RxSwift: d356ab7bee873611322f134c5f9ef379fa183d8f
 
-PODFILE CHECKSUM: e4b70099823510a2f754466cb82fc61dae224821
+PODFILE CHECKSUM: 1eba02c9037259d27f9698e84612e0ce23b02a56
 
 COCOAPODS: 1.11.2

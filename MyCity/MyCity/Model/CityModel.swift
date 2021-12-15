@@ -6,8 +6,40 @@
 //
 
 import Foundation
+import RealmSwift
 
-struct CityModel:Codable{
+class OptionalFloat: Object, Decodable {
+    private var numeric = RealmOptional<Float>()
+    
+    required override init() {
+        super.init()
+    }
+    
+    init(numeric: Float) {
+        super.init()
+        self.numeric = RealmOptional<Float>(numeric)
+    }
+    
+    required public convenience init(from decoder: Decoder) throws {
+        self.init()
+        
+        let singleValueContainer = try decoder.singleValueContainer()
+        if singleValueContainer.decodeNil() == false {
+            let value = try singleValueContainer.decode(Float.self)
+            numeric = RealmOptional(value)
+        }
+    }
+    
+    var value: Float? {
+        return numeric.value
+    }
+    
+    var zeroOrValue: Float {
+        return numeric.value ?? 0
+    }
+}
+
+struct CityModel:Decodable{
     let time: Int
     let data: Data
     
@@ -24,8 +56,8 @@ struct CityModel:Codable{
     
 }
 
-struct Data:Codable {
-    let items: [Items]
+struct Data:Decodable {
+    let items: [City]
     let pagination : Pagination
     
     enum CodingKeys:String, CodingKey {
@@ -35,20 +67,20 @@ struct Data:Codable {
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        items = try container.decode([Items].self, forKey: .items)
+        items = try container.decode([City].self, forKey: .items)
         pagination = try container.decode(Pagination.self, forKey: .pagination)
     }
 }
 
-struct Items:Codable {
-    let id:Int?
-    let name:String?
-    let localName:String?
-    let latitude:Float?
-    let longitude:Float?
-    let createdDate:String?
-    let updatedDate:String?
-    let countryId:Int?
+class City: Object, Decodable {
+    @objc dynamic var id:Int = 0
+    @objc dynamic var name:String?
+    @objc dynamic var localName:String?
+    @objc dynamic var latitude:OptionalFloat?
+    @objc dynamic var longitude:OptionalFloat?
+    @objc dynamic var createdDate:String?
+    @objc dynamic var updatedDate:String?
+    @objc dynamic var countryId:Int = 0
     
     enum CodingKeys:String, CodingKey {
         case id
@@ -61,16 +93,21 @@ struct Items:Codable {
         case countryId = "country_id"
     }
     
-    init(from decoder: Decoder) throws {
+    override class func primaryKey() -> String? {
+        return "id"
+    }
+    
+    public required convenience  init(from decoder: Decoder) throws {
+        self.init()
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try? container.decode(Int.self, forKey: .id)
+        id = try container.decode(Int.self, forKey: .id)
         name = try? container.decode(String.self, forKey: .name)
         localName = try? container.decode(String.self, forKey: .localName)
-        latitude = try? container.decode(Float.self, forKey: .latitude)
-        longitude = try? container.decode(Float.self, forKey: .longitude)
+        latitude = try? container.decode(OptionalFloat.self, forKey: .latitude)
+        longitude = try? container.decode(OptionalFloat.self, forKey: .longitude)
         createdDate = try? container.decode(String.self, forKey: .createdDate)
         updatedDate = try? container.decode(String.self, forKey: .updatedDate)
-        countryId = try? container.decode(Int.self, forKey: .countryId)
+        countryId = try container.decode(Int.self, forKey: .countryId)
     }
     
 }
