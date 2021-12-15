@@ -16,6 +16,7 @@ jobs:
     - name: Build
       run:  cd MyCity
           xcodebuild clean test -project MyCity.xcodeproj -scheme ProjectName -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
+          swift build -v
     - name: Run tests
       run: cd MyCity
            swift test -v
