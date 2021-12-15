@@ -20,7 +20,7 @@ class CityViewModel  {
     private var currentPage: Int = 1
     var delegate: ViewModelToViewDelegate?
     let disposeBag = DisposeBag()
-
+    
     
     var cities = [City]() {
         didSet {
@@ -33,7 +33,7 @@ class CityViewModel  {
         APIManager.shared.getCities(filter: "", page: currentPage).subscribe(onNext:  {[weak self] response in
             self?.pageLimit = response.data.pagination.perPage ?? 15
             self?.addToRealm(cities: response.data.items)
-
+            
             if let page = response.data.pagination.currentPage {
                 self?.currentPage = page + 1
             }
@@ -68,11 +68,10 @@ class CityViewModel  {
         let realm = try! Realm()
         let cities = realm.objects(City.self)
         Observable.collection(from: cities)
-          .map { cities in
-              self.cities = cities.toArray()
-          }
-          .subscribe(onNext: { text  in
-            print("heeee \(text)")
-          })
+            .map { cities in
+                self.cities = cities.toArray()
+            }
+            .subscribe(onNext: { text  in
+            })
     }
 }
