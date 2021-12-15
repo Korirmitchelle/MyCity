@@ -166,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				F5E7E8332768A72A00800277 /* MapStyling */,
+				F5E7E8362768A78300800277 /* Utils.swift */,
 				F5E7E82527687DE700800277 /* SearchFieldUtils.swift */,
 				F5E7E82A2768833C00800277 /* TableViewUtils.swift */,
 				F5E7E82C2768837500800277 /* Endpoints.swift */,
@@ -194,7 +195,6 @@
 		F5E7E8332768A72A00800277 /* MapStyling */ = {
 			isa = PBXGroup;
 			children = (
-				F5E7E8362768A78300800277 /* Utils.swift */,
 				F5E7E8342768A72A00800277 /* mapstyle.json */,
 			);
 			path = MapStyling;

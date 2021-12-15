@@ -102,7 +102,7 @@ extension MyCityViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let listSection = TableSection(rawValue: section) else { return 0 }
         switch listSection {
-        case .userList:
+        case .list:
             return viewModel.cities.count
         case .loader:
             return viewModel.cities.count >= viewModel.pageLimit ? 1 : 0
@@ -114,7 +114,7 @@ extension MyCityViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = UITableViewCell(style: .value1, reuseIdentifier: "Cell")
         cell.selectionStyle = .none
         switch section {
-        case .userList:
+        case .list:
             let city = viewModel.cities[indexPath.row]
             cell.textLabel?.text = city.name
             cell.textLabel?.textColor = .label
@@ -141,7 +141,7 @@ extension MyCityViewController: UITableViewDataSource, UITableViewDelegate {
     
     private func hideBottomLoader() {
         DispatchQueue.main.async {
-            let lastListIndexPath = IndexPath(row: self.viewModel.cities.count - 1, section: TableSection.userList.rawValue)
+            let lastListIndexPath = IndexPath(row: self.viewModel.cities.count - 1, section: TableSection.list.rawValue)
             self.tableView.scrollToRow(at: lastListIndexPath, at: .bottom, animated: true)
         }
     }

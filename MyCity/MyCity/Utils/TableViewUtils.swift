@@ -8,6 +8,6 @@
 import Foundation
 
 enum TableSection: Int {
-    case userList
+    case list
     case loader
 }
