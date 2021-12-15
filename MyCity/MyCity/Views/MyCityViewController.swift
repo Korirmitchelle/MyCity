@@ -6,23 +6,27 @@
 //
 
 import UIKit
+import GoogleMaps
+import GooglePlaces
+
 
 class MyCityViewController: UIViewController {
     let viewModel = CityViewModel()
     
-    enum TableSection: Int {
-        case userList
-        case loader
-    }
-    
+    @IBOutlet weak var segmentedView: UISegmentedControl!
+    @IBOutlet weak var listView: UIView!
+    @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupMapView()
         setupView()
         fetchCities()
         setupSearchBar()
+        setupSegmentedView()
+        showListView()
     }
     
     private func setupView() {
@@ -40,6 +44,53 @@ class MyCityViewController: UIViewController {
     func setupSearchBar(){
         searchBar.delegate = self
         searchBar.searchTextField.addKeyboardDoneButton()
+    }
+    
+    func setupMapView(){
+        mapView.mapStyle(withFilename: "mapstyle", andType: "json")
+    }
+    
+    func createCityMarkers() {
+        self.mapView.clear()
+        var markerList = [GMSMarker]()
+        for city in self.viewModel.cities {
+            if let latitude = city.latitude, let longitude = city.longitude  {
+                let marker = GMSMarker()
+                marker.map = self.mapView
+                marker.iconView = UIImageView(image: R.image.marker())
+                let location = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude))
+                marker.position =  location
+                markerList.append(marker)
+            }
+        }
+        MapViewUtils().delay(seconds: 2) { () -> () in
+            //fit map to markers
+            var bounds = GMSCoordinateBounds()
+            for marker in markerList {
+                bounds = bounds.includingCoordinate(marker.position)
+            }
+            let update = GMSCameraUpdate.fit(bounds, withPadding: 30)
+            self.mapView.animate(with: update)
+        }
+    }
+    
+    func setupSegmentedView(){
+        segmentedView.addTarget(self, action: #selector(segmentedControlChanged), for: .valueChanged)
+    }
+    
+    func showMapView(){
+        mapView.isHidden = false
+        listView.isHidden = true
+    }
+    
+    func showListView(){
+        mapView.isHidden = true
+        listView.isHidden = false
+    }
+    
+    @objc func segmentedControlChanged() {
+        let viewSelected = ViewedSegment(rawValue: segmentedView.selectedSegmentIndex)
+        viewSelected == .mapView ? showMapView() : showListView()
     }
 }
 
@@ -101,6 +152,7 @@ extension MyCityViewController: UITableViewDataSource, UITableViewDelegate {
 extension MyCityViewController:ViewModelToViewDelegate{
     func dataReceived() {
         DispatchQueue.main.async {
+            self.createCityMarkers()
             self.tableView.reloadData()
         }
     }
@@ -108,12 +160,11 @@ extension MyCityViewController:ViewModelToViewDelegate{
 
 extension MyCityViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        self.viewModel.fitlerData(word: searchText){ _ in
-            
-        }
+        self.viewModel.fitlerData(word: searchText,completed: nil)
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
 }
+

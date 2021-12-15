@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -16,6 +17,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TxZ-oK-jxm" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="119" width="414" height="743"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i1v-bP-6hZ">
                                 <rect key="frame" x="0.0" y="119" width="414" height="777"/>
                                 <subviews>
@@ -39,18 +44,24 @@
                             </view>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="n5t-2i-SAd">
                                 <rect key="frame" x="0.0" y="88" width="414" height="32"/>
+                                <color key="backgroundColor" red="0.2627450980392157" green="0.10980392156862745" blue="0.32549019607843138" alpha="0.16872057377897345" colorSpace="custom" customColorSpace="sRGB"/>
                                 <segments>
-                                    <segment title="First"/>
-                                    <segment title="Second"/>
+                                    <segment title="List"/>
+                                    <segment title="Map"/>
                                 </segments>
+                                <color key="selectedSegmentTintColor" name="Primary"/>
                             </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="TxZ-oK-jxm" firstAttribute="top" secondItem="n5t-2i-SAd" secondAttribute="bottom" id="8cs-ET-Qsr"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="TxZ-oK-jxm" secondAttribute="trailing" id="FeT-A3-Dy3"/>
                             <constraint firstItem="i1v-bP-6hZ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="RAw-4y-CWN"/>
+                            <constraint firstItem="TxZ-oK-jxm" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="TDG-z2-Gx6"/>
                             <constraint firstItem="n5t-2i-SAd" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Tv3-6m-NCf"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="n5t-2i-SAd" secondAttribute="trailing" id="VZU-Q0-2Zs"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="TxZ-oK-jxm" secondAttribute="bottom" id="W6R-jZ-W44"/>
                             <constraint firstItem="i1v-bP-6hZ" firstAttribute="top" secondItem="n5t-2i-SAd" secondAttribute="bottom" id="az5-0w-0xd"/>
                             <constraint firstAttribute="bottom" secondItem="i1v-bP-6hZ" secondAttribute="bottom" id="gzX-qI-es9"/>
                             <constraint firstItem="n5t-2i-SAd" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="thq-8g-tnX"/>
@@ -59,7 +70,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="P1b-GQ-6co"/>
                     <connections>
+                        <outlet property="listView" destination="i1v-bP-6hZ" id="lrp-BW-ZHG"/>
+                        <outlet property="mapView" destination="TxZ-oK-jxm" id="hdc-km-2QZ"/>
                         <outlet property="searchBar" destination="zAf-ZT-99D" id="Mcq-e2-y4q"/>
+                        <outlet property="segmentedView" destination="n5t-2i-SAd" id="d51-iL-FWL"/>
                         <outlet property="tableView" destination="che-s5-c81" id="8hN-VR-ZNb"/>
                     </connections>
                 </viewController>
@@ -75,6 +89,11 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="IMc-gF-ND9">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" name="Primary"/>
+                        <color key="barTintColor" name="Primary"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -87,6 +106,9 @@
         </scene>
     </scenes>
     <resources>
+        <namedColor name="Primary">
+            <color red="0.2627450980392157" green="0.10980392156862745" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

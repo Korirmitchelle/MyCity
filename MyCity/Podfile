@@ -9,7 +9,8 @@ target 'MyCity' do
   pod 'R.swift'
   pod 'RxSwift', '6.2.0'
   pod 'RxCocoa', '6.2.0'
-
+  pod 'GoogleMaps'
+  pod 'GooglePlaces'
 
   target 'MyCityTests' do
     inherit! :search_paths
