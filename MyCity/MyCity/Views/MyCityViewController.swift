@@ -30,11 +30,12 @@ class MyCityViewController: UIViewController {
     }
     
     private func setupView() {
-        title = R.string.localizable.navigationTitle()
         tableView.rowHeight = 64
         tableView.dataSource = self
         tableView.delegate = self
         viewModel.delegate = self
+        configureNavigationBar(largeTitleColor: .white, backgoundColor: R.color.primary() ?? .blue, tintColor: .white, title: R.string.localizable.navigationTitle(), preferredLargeTitle: false)
+        segmentedView.setTitleColor(.white,state: .selected)
     }
     
     func fetchCities(){

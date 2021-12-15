@@ -21,7 +21,7 @@
 		F5E7E830276887D500800277 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E7E82F276887D500800277 /* AppConstants.swift */; };
 		F5E7E83227688C9B00800277 /* SegmentedControlUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E7E83127688C9B00800277 /* SegmentedControlUtils.swift */; };
 		F5E7E8352768A72A00800277 /* mapstyle.json in Resources */ = {isa = PBXBuildFile; fileRef = F5E7E8342768A72A00800277 /* mapstyle.json */; };
-		F5E7E8372768A78300800277 /* MapViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E7E8362768A78300800277 /* MapViewUtils.swift */; };
+		F5E7E8372768A78300800277 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E7E8362768A78300800277 /* Utils.swift */; };
 		F5F39DC82763300B002B69C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F39DC72763300B002B69C0 /* AppDelegate.swift */; };
 		F5F39DCA2763300B002B69C0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F39DC92763300B002B69C0 /* SceneDelegate.swift */; };
 		F5F39DCC2763300B002B69C0 /* MyCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F39DCB2763300B002B69C0 /* MyCityViewController.swift */; };
@@ -72,7 +72,7 @@
 		F5E7E82F276887D500800277 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		F5E7E83127688C9B00800277 /* SegmentedControlUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControlUtils.swift; sourceTree = "<group>"; };
 		F5E7E8342768A72A00800277 /* mapstyle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mapstyle.json; sourceTree = "<group>"; };
-		F5E7E8362768A78300800277 /* MapViewUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewUtils.swift; sourceTree = "<group>"; };
+		F5E7E8362768A78300800277 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		F5F39DC42763300B002B69C0 /* MyCity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyCity.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5F39DC72763300B002B69C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F5F39DC92763300B002B69C0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -194,8 +194,8 @@
 		F5E7E8332768A72A00800277 /* MapStyling */ = {
 			isa = PBXGroup;
 			children = (
+				F5E7E8362768A78300800277 /* Utils.swift */,
 				F5E7E8342768A72A00800277 /* mapstyle.json */,
-				F5E7E8362768A78300800277 /* MapViewUtils.swift */,
 			);
 			path = MapStyling;
 			sourceTree = "<group>";
@@ -578,7 +578,7 @@
 				F5E7E82627687DE700800277 /* SearchFieldUtils.swift in Sources */,
 				F5F39DFF276377C7002B69C0 /* R.generated.swift in Sources */,
 				F5F39DCA2763300B002B69C0 /* SceneDelegate.swift in Sources */,
-				F5E7E8372768A78300800277 /* MapViewUtils.swift in Sources */,
+				F5E7E8372768A78300800277 /* Utils.swift in Sources */,
 				F5E7E82B2768833C00800277 /* TableViewUtils.swift in Sources */,
 				F57210262765E3AA00A573D5 /* APIManager.swift in Sources */,
 			);
